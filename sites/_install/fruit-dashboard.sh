@@ -33,10 +33,11 @@ git clone `echo $SRC_REPOSITORY_URL` --depth 1 `echo $SRC_DIRECTORY`
 echo "# --> Please type your credentials for the Fruit Dashboard Source repo (GITHUB)"
 cd `echo $SRC_DIRECTORY`
 git config credential.helper store
+git config --global push.default upstream
 git push
 echo "# ------------------------ DONE ---------------------------- #"
 
-echo "# ----------- Clone CONFIG project from BITBUCKET ---------- #"
+echo "# ------------ Clone CONFIG project from GITHUB ------------ #"
 git clone `echo $CONFIG_REPOSITORY_URL` --depth 1 `echo $CONFIG_DIRECTORY`
 echo "# ------------------------ DONE ---------------------------- #"
 
