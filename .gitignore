@@ -1,0 +1,6 @@
+# Vagrant local directory
+.vagrant
+
+# Sites folder
+sites/*
+!sites/_install

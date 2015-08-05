@@ -1,0 +1,4 @@
+### sites/_install folder ###
+* The sites folder will be mapped to /var/www
+* This folder contains th install scripts for the different sites.
+* To install a site run "sh <site>.sh"
