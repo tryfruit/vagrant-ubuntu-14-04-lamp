@@ -37,7 +37,6 @@ git push
 echo "# ------------------------ DONE ---------------------------- #"
 
 echo "# ----------- Clone CONFIG project from BITBUCKET ---------- #"
-echo "# --> Please type your credentials for the Fruit Dashboard Config repo (GITHUB)"
 git clone `echo $CONFIG_REPOSITORY_URL` --depth 1 `echo $CONFIG_DIRECTORY`
 echo "# ------------------------ DONE ---------------------------- #"
 
@@ -47,9 +46,9 @@ sed -i '/fetch/c\        fetch = +refs/heads/*:refs/remotes/origin/*' `echo $SRC
 git pull --depth 1
 git checkout `echo $SRC_DEV_BRANCH`
 
-echo -e "[branch \"$SRC_DEV_BRANCH\"]" >> `echo $SRC_GIT_CONFIG_FILE`
-echo -e "        remote = origin" >> `echo $SRC_GIT_CONFIG_FILE`
-echo -e "        merge = refs/heads/$SRC_DEV_BRANCH" >> `echo $SRC_GIT_CONFIG_FILE`
+echo "[branch \"$SRC_DEV_BRANCH\"]" >> `echo $SRC_GIT_CONFIG_FILE`
+echo "    remote = origin" >> `echo $SRC_GIT_CONFIG_FILE`
+echo "    merge = refs/heads/$SRC_DEV_BRANCH" >> `echo $SRC_GIT_CONFIG_FILE`
 git pull
 echo "# ------------------------ DONE ---------------------------- #"
 
@@ -66,4 +65,13 @@ echo "# ------------------------ DONE ---------------------------- #"
 echo "# ----------- Create DATABASE, MIGRATE and SEED ------------ #"
 chmod 744 `echo $SRC_DIRECTORY/scripts/reset_database.sh`
 `echo $SRC_DIRECTORY/scripts/reset_database.sh`
+echo "# ------------------------ DONE ---------------------------- #"
+
+echo "# ---------------- Create shortcut aliases ----------------- #"
+echo '# Custom alias commands' | sudo tee -a /home/vagrant/.bashrc
+echo "alias fds='cd /var/www/fruit-dashboard'" | sudo tee -a /home/vagrant/.bashrc
+echo "alias fdc='cd /var/www/fruit-dashboard-config'" | sudo tee -a /home/vagrant/.bashrc
+echo "alias fdd='mysql -u root -ppassword fruitdashboarddb'" | sudo tee -a /home/vagrant/.bashrc
+echo "alias fdserve='cd /var/www/fruit-dashboard/;sh serve;'" | sudo tee -a /home/vagrant/.bashrc
+echo "alias fdlog='cd /var/www/fruit-dashboard/app/storage/logs/; tail -f $(ls -t * | head -1);'" | sudo tee -a /home/vagrant/.bashrc
 echo "# ------------------------ DONE ---------------------------- #"
